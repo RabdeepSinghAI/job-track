@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: jobtrack
+    env: php
+    buildCommand: composer install --optimize-autoloader --no-dev && npm install && npm run build
+    startCommand: php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: DB_CONNECTION
+        value: pgsql
